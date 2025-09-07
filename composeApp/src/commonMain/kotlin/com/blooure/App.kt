@@ -9,8 +9,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.blooure.features.bloodPressure.bloodPressureGraph
+import com.blooure.features.home.homeGraph
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import com.blooure.features.splash.splashGraph
+import com.blooure.features.user.userGraph
 import com.designsystem.theme.BlooureTheme
 import com.designsystem.theme.Colors
 import com.navigation.Destinations
@@ -31,7 +34,9 @@ fun App() {
                 startDestination = Destinations.Splash
             ) {
                 splashGraph(navController)
-
+                homeGraph(navController)
+                bloodPressureGraph()
+                userGraph()
             }
         }
     }
