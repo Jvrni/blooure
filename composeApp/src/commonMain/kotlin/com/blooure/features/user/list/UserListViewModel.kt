@@ -1,8 +1,8 @@
-package com.blooure.features.user
+package com.blooure.features.user.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.blooure.features.user.contract.UserListContract
+import com.blooure.features.user.list.contract.UserListContract
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow

@@ -6,7 +6,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.blooure.collectInLaunchedEffect
 import com.blooure.features.user.add.AddUserScreen
-import com.blooure.features.user.contract.UserListContract
+import com.blooure.features.user.add.AddUserViewModel
+import com.blooure.features.user.add.contract.AddUserContract
+import com.blooure.features.user.list.contract.UserListContract
+import com.blooure.features.user.list.UserListScreen
+import com.blooure.features.user.list.UserListViewModel
 import com.blooure.use
 import com.navigation.Destinations
 import org.koin.compose.getKoin
@@ -32,6 +36,19 @@ fun NavGraphBuilder.userGraph(navController: NavHostController) {
     }
 
     composable<Destinations.AddUser>() {
-        AddUserScreen()
+        val viewModel: AddUserViewModel = getKoin().get()
+        val (state, event, effect) = use(viewModel = viewModel)
+
+        LaunchedEffect(Unit) {
+            event.invoke(AddUserContract.Event.OnStart)
+        }
+
+        effect.collectInLaunchedEffect { dispatch ->
+            when (dispatch) {
+                is AddUserContract.Effect.Back -> navController.popBackStack()
+            }
+        }
+
+        AddUserScreen(state, event)
     }
 }

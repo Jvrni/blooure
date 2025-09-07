@@ -19,5 +19,8 @@
     <string name="add_user_title">Add User</string>
     <string name="add_user_name_label">Name</string>
     <string name="add_user_button_label">Save</string>
+    <string name="add_user_snackbar_success">User added</string>
+    <string name="add_user_snackbar_error">Error adding user</string>
+    <string name="add_user_snackbar_warning">Invalid name</string>
 
 </resources>

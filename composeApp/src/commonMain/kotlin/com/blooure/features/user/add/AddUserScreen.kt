@@ -13,6 +13,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,20 +23,25 @@ import blooure.composeapp.generated.resources.Res
 import blooure.composeapp.generated.resources.add_user_button_label
 import blooure.composeapp.generated.resources.add_user_name_label
 import blooure.composeapp.generated.resources.add_user_title
+import com.blooure.features.user.add.contract.AddUserContract
+import com.blooure.features.user.add.models.SnackbarUserOptions
+import com.designsystem.components.Snackbar
 import com.designsystem.components.TopAppBar
 import com.designsystem.theme.Colors
+import com.domain.models.User
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun AddUserScreen() {
+fun AddUserScreen(state: AddUserContract.State, event: (AddUserContract.Event) -> Unit) {
     Box(modifier = Modifier.fillMaxSize().background(Colors.background)) {
+        val name = remember { mutableStateOf("") }
 
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             TopAppBar(stringResource(Res.string.add_user_title)) {
-
+                event.invoke(AddUserContract.Event.OnBack)
             }
 
             TextField(
@@ -44,12 +51,12 @@ fun AddUserScreen() {
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent
                 ),
-                value = "",
+                value = name.value,
                 label = {
                     Text(text = stringResource(Res.string.add_user_name_label))
                 },
-                onValueChange = {
-
+                onValueChange = { value ->
+                    name.value = value
                 }
             )
         }
@@ -60,9 +67,34 @@ fun AddUserScreen() {
                 .height(56.dp)
                 .padding(horizontal = 16.dp, vertical = 4.dp)
                 .align(Alignment.BottomCenter),
-            onClick = {}
+            onClick = {
+                event.invoke(AddUserContract.Event.OnAddUser(User(name = name.value.trim())))
+            }
         ) {
             Text(text = stringResource(Res.string.add_user_button_label))
+        }
+
+        when(val option = state.snackbarOptions) {
+            SnackbarUserOptions.Success -> {
+                Snackbar(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp).align(Alignment.TopCenter),
+                    showSnackbar = state.showSnackbar,
+                    message = stringResource(option.message)
+                ) {
+                    event.invoke(AddUserContract.Event.OnBack)
+                }
+            }
+            SnackbarUserOptions.Warning, SnackbarUserOptions.Error -> {
+                Snackbar(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp).align(Alignment.TopCenter),
+                    showSnackbar = state.showSnackbar,
+                    containerColor = Colors.error,
+                    message = stringResource(option.message)
+                ) {
+                    event.invoke(AddUserContract.Event.OnHideSnackbar)
+                }
+            }
+            else -> {}
         }
     }
 }

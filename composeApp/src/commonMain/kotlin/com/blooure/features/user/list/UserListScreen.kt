@@ -1,4 +1,4 @@
-package com.blooure.features.user
+package com.blooure.features.user.list
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.FabPosition
@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import blooure.composeapp.generated.resources.Res
 import blooure.composeapp.generated.resources.ic_plus
 import blooure.composeapp.generated.resources.user_list_title
-import com.blooure.features.user.contract.UserListContract
+import com.blooure.features.user.list.contract.UserListContract
 import com.designsystem.components.TopAppBar
 import com.designsystem.theme.Colors
 import com.navigation.Destinations

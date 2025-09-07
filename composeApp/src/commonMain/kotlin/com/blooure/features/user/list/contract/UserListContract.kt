@@ -1,4 +1,4 @@
-package com.blooure.features.user.contract
+package com.blooure.features.user.list.contract
 
 import com.blooure.UnidirectionalViewModel
 import com.navigation.Destinations
