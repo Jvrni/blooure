@@ -22,4 +22,15 @@ sealed class Destinations {
     @Serializable
     data object Splash : Destinations()
 
+    @Serializable
+    data object Home : Destinations()
+
+    @Serializable
+    data object UserList : Destinations()
+
+    @Serializable
+    data object AddUser : Destinations()
+
+    @Serializable
+    data object BloodPressure : Destinations()
 }
