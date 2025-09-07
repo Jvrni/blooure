@@ -8,5 +8,7 @@ import com.navigation.Destinations
 fun NavGraphBuilder.splashGraph(navController: NavHostController) {
     composable<Destinations.Splash> {
         SplashScreen()
+
+        navController.navigate(Destinations.Home)
     }
 }
