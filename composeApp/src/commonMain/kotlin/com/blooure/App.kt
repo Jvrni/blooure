@@ -18,29 +18,37 @@ import com.blooure.features.user.userGraph
 import com.designsystem.theme.BlooureTheme
 import com.designsystem.theme.Colors
 import com.navigation.Destinations
-import org.koin.compose.KoinApplication
+import org.koin.core.context.startKoin
+import org.koin.dsl.KoinAppDeclaration
+
+fun initKoinIos() = initKoin(appDeclaration = {})
+
+fun initKoin(appDeclaration: KoinAppDeclaration = {}) {
+    startKoin {
+        appDeclaration()
+        modules(appModule())
+    }
+}
 
 @Composable
 @Preview
 fun App() {
-    KoinApplication(application = { modules(appModule()) }) {
-        BlooureTheme {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = Colors.background
-            ) {
-                val navController = rememberNavController()
+    BlooureTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = Colors.background
+        ) {
+            val navController = rememberNavController()
 
-                NavHost(
-                    modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
-                    navController = navController,
-                    startDestination = Destinations.Splash
-                ) {
-                    splashGraph(navController)
-                    homeGraph(navController)
-                    bloodPressureGraph()
-                    userGraph()
-                }
+            NavHost(
+                modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
+                navController = navController,
+                startDestination = Destinations.Splash
+            ) {
+                splashGraph(navController)
+                homeGraph(navController)
+                bloodPressureGraph()
+                userGraph(navController)
             }
         }
     }

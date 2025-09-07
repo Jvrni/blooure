@@ -35,6 +35,8 @@ kotlin {
             implementation(libs.koin.android)
         }
         commonMain.dependencies {
+            implementation(project(":domain"))
+            implementation(project(":data"))
             implementation(project(":core:designSystem"))
             implementation(project(":core:navigation"))
 
