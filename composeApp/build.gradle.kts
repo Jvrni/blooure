@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinX.serialization)
 }
 
 kotlin {
@@ -31,14 +32,18 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
+            implementation(project(":core:designSystem"))
+            implementation(project(":core:navigation"))
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodelCompose)
-            implementation(libs.androidx.lifecycle.runtimeCompose)
+
+            implementation(libs.navigation.compose)
+            implementation(libs.kotlinx.serialization.json)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -72,6 +77,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 }
+
+//compose.resources {
+//    publicResClass = false
+//    packageOfResClass = "com.blooure.resources"
+//    generateResClass = auto
+//}
 
 dependencies {
     debugImplementation(compose.uiTooling)
