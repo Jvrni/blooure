@@ -12,26 +12,29 @@ import androidx.compose.ui.unit.dp
 import blooure.composeapp.generated.resources.Res
 import blooure.composeapp.generated.resources.ic_plus
 import blooure.composeapp.generated.resources.user_list_title
+import com.blooure.features.user.contract.UserListContract
 import com.designsystem.components.TopAppBar
 import com.designsystem.theme.Colors
+import com.navigation.Destinations
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun UserListScreen() {
+fun UserListScreen(state: UserListContract.State, event: (UserListContract.Event) -> Unit) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Colors.background,
         contentColor = Colors.onBackground,
         topBar = {
             TopAppBar(stringResource(Res.string.user_list_title)) {
-
+                event.invoke(UserListContract.Event.OnBack)
             }
         },
         floatingActionButton = {
             FloatingActionButton(
                 elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 2.dp),
                 onClick = {
+                    event.invoke(UserListContract.Event.OnNavigate(Destinations.AddUser))
                 }
             ) {
                 Icon(

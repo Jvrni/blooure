@@ -1,0 +1,22 @@
+package com.blooure.features.user.contract
+
+import com.blooure.UnidirectionalViewModel
+import com.navigation.Destinations
+
+interface UserListContract : UnidirectionalViewModel<UserListContract.State, UserListContract.Event, UserListContract.Effect> {
+
+    data class State(
+        val isLoading: Boolean = false
+    )
+
+    sealed class Event {
+        data object OnStart : Event()
+        data class OnNavigate(val destination: Destinations): Event()
+        data object OnBack: Event()
+    }
+
+    sealed class Effect {
+        data class NavigateTo(val destination: Destinations) : Effect()
+        data object Back : Effect()
+    }
+}
