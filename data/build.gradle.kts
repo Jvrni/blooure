@@ -1,7 +1,10 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
+    alias(libs.plugins.kotlinX.serialization)
     alias(libs.plugins.androidLint)
+    alias(libs.plugins.room)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -59,8 +62,13 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(project(":domain"))
+
                 implementation(libs.kotlin.stdlib)
-                // Add KMP dependencies here
+                implementation(libs.kotlinx.serialization.json)
+                implementation(libs.koin.core)
+                implementation(libs.room.runtime)
+                implementation(libs.sqlite.bundled)
             }
         }
 
@@ -97,4 +105,12 @@ kotlin {
         }
     }
 
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
+}
+
+dependencies {
+    ksp(libs.room.compiler)
 }
