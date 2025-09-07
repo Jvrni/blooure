@@ -11,37 +11,31 @@ import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import blooure.composeapp.generated.resources.Res
 import blooure.composeapp.generated.resources.ic_plus
 import com.blooure.features.home.contents.bottomSheet.HomeBottomSheet
+import com.blooure.features.home.contract.HomeContract
 import com.designsystem.theme.Colors
-import com.navigation.Destinations
 import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(onNavigate: (Destinations) -> Unit) {
-    val isVisibleBottomSheet = remember { mutableStateOf(false) }
-
+fun HomeScreen(state: HomeContract.State, event: (HomeContract.Event) -> Unit) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Colors.background,
         contentColor = Colors.onBackground,
         floatingActionButton = {
             AnimatedVisibility(
-                visible = !isVisibleBottomSheet.value,
+                visible = !state.isBottomSheetVisible,
                 enter = fadeIn(),
                 exit = fadeOut()
             ) {
                 FloatingActionButton(
                     elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 2.dp),
-                    onClick = {
-                        isVisibleBottomSheet.value = !isVisibleBottomSheet.value
-                    }
+                    onClick = { event.invoke(HomeContract.Event.ShowBottomSheet(true)) }
                 ) {
                     Icon(
                         painter = painterResource(Res.drawable.ic_plus),
@@ -53,10 +47,10 @@ fun HomeScreen(onNavigate: (Destinations) -> Unit) {
         floatingActionButtonPosition = FabPosition.End
     ) {
         HomeBottomSheet(
-            isVisible = isVisibleBottomSheet.value,
-            onDismiss = { isVisibleBottomSheet.value = false }
+            isVisible = state.isBottomSheetVisible,
+            onDismiss = { event.invoke(HomeContract.Event.ShowBottomSheet(false)) }
         ) {
-            onNavigate.invoke(it)
+            event.invoke(HomeContract.Event.OnNavigate(it))
         }
     }
 }

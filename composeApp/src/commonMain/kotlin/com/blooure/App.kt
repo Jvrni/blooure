@@ -9,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.blooure.di.appModule
 import com.blooure.features.bloodPressure.bloodPressureGraph
 import com.blooure.features.home.homeGraph
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -17,26 +18,29 @@ import com.blooure.features.user.userGraph
 import com.designsystem.theme.BlooureTheme
 import com.designsystem.theme.Colors
 import com.navigation.Destinations
+import org.koin.compose.KoinApplication
 
 @Composable
 @Preview
 fun App() {
-    BlooureTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = Colors.background
-        ) {
-            val navController = rememberNavController()
-
-            NavHost(
-                modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
-                navController = navController,
-                startDestination = Destinations.Splash
+    KoinApplication(application = { modules(appModule()) }) {
+        BlooureTheme {
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = Colors.background
             ) {
-                splashGraph(navController)
-                homeGraph(navController)
-                bloodPressureGraph()
-                userGraph()
+                val navController = rememberNavController()
+
+                NavHost(
+                    modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
+                    navController = navController,
+                    startDestination = Destinations.Splash
+                ) {
+                    splashGraph(navController)
+                    homeGraph(navController)
+                    bloodPressureGraph()
+                    userGraph()
+                }
             }
         }
     }

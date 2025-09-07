@@ -90,9 +90,7 @@ fun HomeBottomSheet(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable {
-                                onAction.invoke(item.destination)
-                            }
+                            .clickable { onAction.invoke(item.destination) }
                             .padding(12.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
