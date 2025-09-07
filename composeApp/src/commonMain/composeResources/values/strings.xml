@@ -1,0 +1,9 @@
+<resources>
+    <!-- HOME -->
+    <string name="options_bottom_sheet_title">Choose an option</string>
+    <string name="options_bottom_sheet_users">Users</string>
+    <string name="options_bottom_sheet_blood_pressure">Blood Pressure</string>
+
+
+
+</resources>
