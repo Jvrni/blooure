@@ -6,4 +6,12 @@
 
 
 
+    <!-- USER LIST -->
+    <string name="user_list_title">Users</string>
+
+    <!-- ADD USER -->
+    <string name="add_user_title">Add User</string>
+    <string name="add_user_name_label">Name</string>
+    <string name="add_user_button_label">Save</string>
+
 </resources>
