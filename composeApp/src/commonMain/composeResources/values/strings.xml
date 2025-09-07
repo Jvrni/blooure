@@ -14,6 +14,7 @@
 
     <!-- USER LIST -->
     <string name="user_list_title">Users</string>
+    <string name="user_list_empty_label">Empty list, add new user!</string>
 
     <!-- ADD USER -->
     <string name="add_user_title">Add User</string>

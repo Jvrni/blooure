@@ -7,5 +7,6 @@ interface UserRepository {
 
     fun addUser(user: User): Flow<Unit>
     fun getUsers(): Flow<List<User>>
+    fun deleteUser(user: User): Flow<Unit>
 
 }

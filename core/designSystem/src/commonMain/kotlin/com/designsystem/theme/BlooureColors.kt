@@ -30,7 +30,7 @@ val lightColors = BlooureColors(
     onBackground = GreyECECEC,
     surface = White,
     onSurface = Black,
-    outline = Grey20,
+    outline = Black,
     isLight = true,
 )
 

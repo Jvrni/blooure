@@ -12,7 +12,7 @@ val provideViewModelModule = module {
     }
 
     single {
-        UserListViewModel()
+        UserListViewModel(get(), get())
     }
 
     single {

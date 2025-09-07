@@ -32,4 +32,10 @@ class UserRepositoryImpl(val database: UserDao) : UserRepository {
             )
         }.flowOn(Dispatchers.IO)
     }
+
+    override fun deleteUser(user: User): Flow<Unit> {
+        return flow {
+            emit(database.deleteUser(user.id))
+        }.flowOn(Dispatchers.IO)
+    }
 }

@@ -16,11 +16,11 @@ interface UserDao {
     suspend fun getUsers(): List<UserDb>?
 
     @Query("SELECT * FROM users WHERE id = :id")
-    suspend fun getUser(id: Int): UserDb?
+    suspend fun getUser(id: Long): UserDb?
 
     @Update
     suspend fun updateUser(user: UserDb)
 
     @Query("DELETE FROM users WHERE id = :id")
-    suspend fun deleteUser(id: Int)
+    suspend fun deleteUser(id: Long)
 }
