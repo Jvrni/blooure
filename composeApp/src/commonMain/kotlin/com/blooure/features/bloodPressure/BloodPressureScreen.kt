@@ -60,6 +60,17 @@ import org.jetbrains.compose.resources.stringResource
 import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
 
+/**
+ * Composable function for the Blood Pressure screen.
+ * This screen allows users to input their blood pressure readings, select a user,
+ * pick a date and time, and choose the state of activity during the reading.
+ *
+ * @param state The current state of the Blood Pressure screen, containing data like
+ *              whether to show dialogs (bottom sheet, date picker, time picker), list of users,
+ *              and snackbar options.
+ * @param event A lambda function to send events from the UI to the ViewModel,
+ *              such as navigation actions, dialog visibility changes, or data submission.
+ */
 @OptIn(
     ExperimentalMaterial3Api::class, ExperimentalTime::class,
     FormatStringsInDatetimeFormats::class

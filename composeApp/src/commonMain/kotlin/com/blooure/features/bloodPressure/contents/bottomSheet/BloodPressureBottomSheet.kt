@@ -42,6 +42,13 @@ import com.domain.models.User
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * Composable function that displays a bottom sheet for selecting a user to record blood pressure.
+ *
+ * @param users List of users to display in the bottom sheet.
+ * @param onDismiss Callback function to be invoked when the bottom sheet is dismissed.
+ * @param onAction Callback function to be invoked when a user is selected from the bottom sheet.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BloodPressureBottomSheet(

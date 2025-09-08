@@ -6,6 +6,10 @@ import com.blooure.features.user.add.AddUserViewModel
 import com.blooure.features.user.list.UserListViewModel
 import org.koin.dsl.module
 
+/**
+ * Koin module for providing ViewModel instances.
+ * This module defines how ViewModels are created and injected throughout the application.
+ */
 val provideViewModelModule = module {
 
     single {

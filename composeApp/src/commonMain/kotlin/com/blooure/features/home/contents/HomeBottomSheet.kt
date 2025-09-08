@@ -29,6 +29,19 @@ import com.navigation.Destinations
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * Composable function that displays a modal bottom sheet with a list of options.
+ *
+ * This bottom sheet is used to present various actions or navigation choices to the user.
+ * It includes a title and a list of items, each with an icon and a label.
+ * Clicking on an item triggers the `onAction` callback with the corresponding destination.
+ *
+ * @param onDismiss A lambda function to be invoked when the bottom sheet is dismissed
+ *                  (e.g., by swiping down or tapping outside).
+ * @param onAction A lambda function that takes a [Destinations] object as a parameter.
+ *                 This function is invoked when an option in the bottom sheet is clicked.
+ *                 The [Destinations] object represents the target screen or action.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeBottomSheet(

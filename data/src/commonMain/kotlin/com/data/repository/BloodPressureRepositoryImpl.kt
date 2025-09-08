@@ -10,6 +10,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
+/**
+ * Implementation of [BloodPressureRepository] that uses a local database to store and retrieve blood pressure data.
+ *
+ * @property database The Data Access Object (DAO) for interacting with the blood pressure table in the database.
+ */
 class BloodPressureRepositoryImpl(val database: BloodPressureDao) : BloodPressureRepository {
     override fun addBloodPressure(bloodPressure: BloodPressure): Flow<Unit> {
         return flow {

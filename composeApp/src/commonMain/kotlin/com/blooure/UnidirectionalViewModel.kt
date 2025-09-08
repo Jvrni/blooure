@@ -7,6 +7,13 @@ import androidx.compose.runtime.getValue
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
+/**
+ * Represents a Unidirectional ViewModel that follows the MVI (Model-View-Intent) pattern.
+ *
+ * @param STATE The type of the state emitted by the ViewModel.
+ * @param EVENT The type of events that can be sent to the ViewModel.
+ * @param EFFECT The type of side effects that the ViewModel can produce.
+ */
 interface UnidirectionalViewModel<STATE, EVENT, EFFECT> {
     val state: StateFlow<STATE>
     val effect: SharedFlow<EFFECT>

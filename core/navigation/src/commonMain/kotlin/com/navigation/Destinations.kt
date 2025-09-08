@@ -20,9 +20,6 @@ import kotlinx.serialization.Serializable
 sealed class Destinations {
 
     @Serializable
-    data object Splash : Destinations()
-
-    @Serializable
     data object Home : Destinations()
 
     @Serializable

@@ -10,6 +10,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
+/**
+ * Implementation of [UserRepository] that interacts with a local database.
+ *
+ * @property database The [UserDao] instance used for database operations.
+ */
 class UserRepositoryImpl(val database: UserDao) : UserRepository {
     override fun addUser(user: User): Flow<Unit> {
         return flow {
