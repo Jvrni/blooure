@@ -28,7 +28,7 @@ import com.designsystem.theme.Colors
 @Composable
 fun TimePickerDialog(
     onDismiss: () -> Unit,
-    onTimeSelected: (String, String) -> Unit
+    onTimeSelected: (Int, Int) -> Unit
 ) {
     val timeState = rememberTimePickerState(is24Hour = true)
 
@@ -78,7 +78,7 @@ fun TimePickerDialog(
                         Button(
                             modifier = Modifier.padding(start = 8.dp),
                             onClick = {
-                                onTimeSelected.invoke(timeState.hour.toString(), timeState.minute.toString())
+                                onTimeSelected.invoke(timeState.hour, timeState.minute)
                             }
                         ) {
                             Text(text = "OK")

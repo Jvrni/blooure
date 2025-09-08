@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinX.serialization)
+    id("dev.mokkery") version "2.9.0"
     alias(libs.plugins.room)
     alias(libs.plugins.ksp)
 }
@@ -59,6 +60,7 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(libs.kotlinx.coroutines.test)
         }
     }
 }

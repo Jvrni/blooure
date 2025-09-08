@@ -3,6 +3,9 @@
     <string name="home_options_bottom_sheet_title">Choose an option</string>
     <string name="home_options_bottom_sheet_users">Users</string>
     <string name="home_options_bottom_sheet_blood_pressure">Blood Pressure</string>
+    <string name="home_description_pressure">The user %1$s took his blood pressure on %2$s while I was at %3$s.</string>
+    <string name="home_list_empty_label">Empty list, add new blood pressure!</string>
+    <string name="home_blood_pressure_label">Blood Pressure: %1$s/%2$s</string>
 
     <!-- BLOOD PRESSURE -->
     <string name="blood_pressure_title">Add Blood Pressure</string>
@@ -15,6 +18,9 @@
     <string name="blood_pressure_snackbar_error">Error adding Blood pressure</string>
     <string name="blood_pressure_snackbar_warning">Invalid value</string>
     <string name="blood_pressure_bottom_sheet_title">Choose an User</string>
+    <string name="blood_pressure_state_rest">Rest</string>
+    <string name="blood_pressure_state_light_activity">Light activity</string>
+    <string name="blood_pressure_state_intense_activity">Intense Physical Activity</string>
 
     <!-- USER LIST -->
     <string name="user_list_title">Users</string>

@@ -9,7 +9,7 @@ import org.koin.dsl.module
 val provideViewModelModule = module {
 
     single {
-        HomeViewModel()
+        HomeViewModel(get(), get())
     }
 
     single {
@@ -17,7 +17,7 @@ val provideViewModelModule = module {
     }
 
     single {
-        UserListViewModel(get(), get())
+        UserListViewModel(get(), get(), get())
     }
 
     single {

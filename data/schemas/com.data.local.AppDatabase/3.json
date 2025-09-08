@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "dddbe1f5aac5805ee9589db2cdef3d2a",
+    "identityHash": "60d4ebc2060d8c28b060b6ff0b484f6a",
     "entities": [
       {
         "tableName": "users",
@@ -30,7 +30,7 @@
       },
       {
         "tableName": "blood_pressure",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `systolic` INTEGER NOT NULL, `diastolic` INTEGER NOT NULL, `date` TEXT NOT NULL, `time` TEXT NOT NULL, `userId` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `systolic` INTEGER NOT NULL, `diastolic` INTEGER NOT NULL, `dateTime` TEXT NOT NULL, `state` TEXT NOT NULL, `userId` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -51,14 +51,14 @@
             "notNull": true
           },
           {
-            "fieldPath": "date",
-            "columnName": "date",
+            "fieldPath": "dateTime",
+            "columnName": "dateTime",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "time",
-            "columnName": "time",
+            "fieldPath": "state",
+            "columnName": "state",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -79,7 +79,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'dddbe1f5aac5805ee9589db2cdef3d2a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '60d4ebc2060d8c28b060b6ff0b484f6a')"
     ]
   }
 }

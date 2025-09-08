@@ -1,4 +1,4 @@
-package com.blooure.features.home.contents.bottomSheet.models
+package com.blooure.features.home.models
 
 import blooure.composeapp.generated.resources.Res
 import blooure.composeapp.generated.resources.ic_document_center

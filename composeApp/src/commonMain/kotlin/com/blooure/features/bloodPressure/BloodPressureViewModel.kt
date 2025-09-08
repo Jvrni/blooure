@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.blooure.features.bloodPressure.contract.BloodPressureContract
 import com.blooure.features.bloodPressure.models.SnackbarBloodPressureOptions
-import com.blooure.features.user.add.contract.AddUserContract
 import com.domain.bloodPressure.AddBloodPressure
 import com.domain.models.BloodPressure
+import com.domain.models.User
 import com.domain.user.GetUsers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,6 +17,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.LocalTime
+import kotlinx.datetime.format
+import kotlinx.datetime.format.FormatStringsInDatetimeFormats
+import kotlinx.datetime.format.byUnicodePattern
 
 class BloodPressureViewModel(
     private val addBloodPressure: AddBloodPressure,
@@ -39,11 +45,11 @@ class BloodPressureViewModel(
 
             is BloodPressureContract.Event.OnAddBloodPressure -> {
                 addBloodPressure(
-                    userId = event.userId,
+                    user = event.user,
                     systolic = event.systolic,
                     diastolic = event.diastolic,
-                    date = event.date,
-                    time = event.time
+                    dateTime = event.dateTime,
+                    state = event.state
                 )
             }
 
@@ -76,12 +82,13 @@ class BloodPressureViewModel(
         }
     }
 
+    @OptIn(FormatStringsInDatetimeFormats::class)
     private fun addBloodPressure(
-        userId: Long,
+        user: User,
         systolic: String,
         diastolic: String,
-        date: String,
-        time: String,
+        dateTime: String,
+        state: String,
     ) {
         viewModelScope.launch {
             _state.update {
@@ -91,7 +98,7 @@ class BloodPressureViewModel(
                 )
             }
 
-            if (date.isEmpty() || time.isEmpty() || userId == 0L || systolic.isBlank() || diastolic.isBlank()) {
+            if (dateTime.isEmpty() || user.name.isBlank() || systolic.isBlank() || diastolic.isBlank()) {
                 _state.update {
                     it.copy(
                         snackbarOptions = SnackbarBloodPressureOptions.Warning,
@@ -104,11 +111,11 @@ class BloodPressureViewModel(
 
             addBloodPressure.invoke(
                 BloodPressure(
-                    userId = userId,
+                    userId = user.id,
                     systolic = systolic.toInt(),
                     diastolic = diastolic.toInt(),
-                    date = date,
-                    time = time
+                    dateTime = dateTime,
+                    state = state
                 )
             )
                 .catch {

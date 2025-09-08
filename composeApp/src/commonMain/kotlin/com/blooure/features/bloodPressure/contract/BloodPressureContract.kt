@@ -20,9 +20,9 @@ interface BloodPressureContract : UnidirectionalViewModel<BloodPressureContract.
         data class OnAddBloodPressure(
             val systolic: String,
             val diastolic: String,
-            val date: String,
-            val time: String,
-            val userId: Long
+            val dateTime: String,
+            val state: String,
+            val user: User
         ) : Event()
         data class ShowBottomSheet(val isShowBottomSheet: Boolean): Event()
         data class ShowDatePicker(val isShowDatePicker: Boolean): Event()

@@ -1,6 +1,8 @@
 package com.domain.di
 
 import com.domain.bloodPressure.AddBloodPressure
+import com.domain.bloodPressure.DeleteBloodPressures
+import com.domain.bloodPressure.GetBloodPressures
 import com.domain.user.AddUser
 import com.domain.user.DeleteUser
 import com.domain.user.GetUsers
@@ -22,5 +24,13 @@ val provideDomainModule = module {
 
     single {
         DeleteUser(get())
+    }
+
+    single {
+        GetBloodPressures(get())
+    }
+
+    single {
+        DeleteBloodPressures(get())
     }
 }
