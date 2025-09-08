@@ -55,6 +55,7 @@ class UserListViewModel(
             getUsers.invoke()
                 .catch {
                     _state.update { it.copy(users = emptyList(), showError = true) }
+                    it.message
                 }
                 .collect { users ->
                     _state.update { it.copy(users = users, showError = false) }

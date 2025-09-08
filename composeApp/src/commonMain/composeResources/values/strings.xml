@@ -1,8 +1,8 @@
 <resources>
     <!-- HOME -->
-    <string name="options_bottom_sheet_title">Choose an option</string>
-    <string name="options_bottom_sheet_users">Users</string>
-    <string name="options_bottom_sheet_blood_pressure">Blood Pressure</string>
+    <string name="home_options_bottom_sheet_title">Choose an option</string>
+    <string name="home_options_bottom_sheet_users">Users</string>
+    <string name="home_options_bottom_sheet_blood_pressure">Blood Pressure</string>
 
     <!-- BLOOD PRESSURE -->
     <string name="blood_pressure_title">Add Blood Pressure</string>
@@ -11,6 +11,10 @@
     <string name="blood_pressure_select_user_label">Select user</string>
     <string name="blood_pressure_select_date_time_label">Select date time</string>
     <string name="blood_pressure_button_label">Save</string>
+    <string name="blood_pressure_snackbar_success">Blood pressure added</string>
+    <string name="blood_pressure_snackbar_error">Error adding Blood pressure</string>
+    <string name="blood_pressure_snackbar_warning">Invalid value</string>
+    <string name="blood_pressure_bottom_sheet_title">Choose an User</string>
 
     <!-- USER LIST -->
     <string name="user_list_title">Users</string>

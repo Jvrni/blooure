@@ -3,7 +3,10 @@ package com.data.di
 import com.domain.user.UserRepository
 import com.data.repository.UserRepositoryImpl
 import com.data.local.AppDatabase
+import com.data.local.BloodPressureDao
 import com.data.local.UserDao
+import com.data.repository.BloodPressureRepositoryImpl
+import com.domain.bloodPressure.BloodPressureRepository
 import org.koin.dsl.module
 
 /**
@@ -18,6 +21,8 @@ import org.koin.dsl.module
  */
 val provideServiceModule = module {
     factory { UserRepositoryImpl(get()) as UserRepository }
+    factory { BloodPressureRepositoryImpl(get()) as BloodPressureRepository }
 
     single<UserDao> { get<AppDatabase>().getUserDao() }
+    single<BloodPressureDao> { get<AppDatabase>().getBloodPressureDao() }
 }
