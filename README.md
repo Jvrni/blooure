@@ -4,10 +4,6 @@ Blooure App
 **Blooure App** is a fully functional multiplatform app built entirely with Kotlin and Jetpack Compose. This
 Follows design and development best practices.
 
-https://github.com/user-attachments/assets/533a00a5-4a9b-4e83-8ca1-6b2cc44b2609
-
-https://github.com/user-attachments/assets/d925cff4-9ea9-4ed5-988e-39c75b91b917
-
 
 ## Setup
 - As it is a project made in KMM, if you want to generate the iOS version, you will need a MacOS.
