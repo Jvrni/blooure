@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,6 +15,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.rememberDatePickerState
@@ -30,6 +32,9 @@ import blooure.composeapp.generated.resources.blood_pressure_button_label
 import blooure.composeapp.generated.resources.blood_pressure_diastolic_pressure_label
 import blooure.composeapp.generated.resources.blood_pressure_select_date_time_label
 import blooure.composeapp.generated.resources.blood_pressure_select_user_label
+import blooure.composeapp.generated.resources.blood_pressure_state_intense_activity
+import blooure.composeapp.generated.resources.blood_pressure_state_light_activity
+import blooure.composeapp.generated.resources.blood_pressure_state_rest
 import blooure.composeapp.generated.resources.blood_pressure_systolic_pressure_label
 import blooure.composeapp.generated.resources.blood_pressure_title
 import com.blooure.features.bloodPressure.contents.bottomSheet.BloodPressureBottomSheet
@@ -43,14 +48,22 @@ import com.designsystem.components.TopAppBar
 import com.designsystem.theme.Colors
 import com.domain.models.User
 import kotlinx.datetime.DateTimeUnit.Companion.DAY
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.format
+import kotlinx.datetime.format.FormatStringsInDatetimeFormats
+import kotlinx.datetime.format.byUnicodePattern
 import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.stringResource
 import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalTime::class)
+@OptIn(
+    ExperimentalMaterial3Api::class, ExperimentalTime::class,
+    FormatStringsInDatetimeFormats::class
+)
 @Composable
 fun BloodPressureScreen(
     state: BloodPressureContract.State,
@@ -61,10 +74,16 @@ fun BloodPressureScreen(
     val systolic = remember { mutableStateOf("") }
     val diastolic = remember { mutableStateOf("") }
     val user = remember { mutableStateOf(User(name = "")) }
-    val date = remember { mutableStateOf("") }
-    val time = remember { mutableStateOf("") }
     val dateTime = remember { mutableStateOf("") }
     val datePickerState = rememberDatePickerState()
+
+    val options = listOf(
+        stringResource(Res.string.blood_pressure_state_rest),
+        stringResource(Res.string.blood_pressure_state_light_activity),
+        stringResource(Res.string.blood_pressure_state_intense_activity),
+    )
+
+    val (selectedOption, setSelectedOption) = remember { mutableStateOf(options[0]) }
 
     Box(modifier = Modifier.fillMaxSize().background(Colors.background)) {
 
@@ -127,6 +146,19 @@ fun BloodPressureScreen(
                     dateTime.value.ifEmpty { stringResource(Res.string.blood_pressure_select_date_time_label) }
                 Text(text = label)
             }
+
+            options.forEach { option ->
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).clickable { setSelectedOption(option) },
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    RadioButton(
+                        selected = (option == selectedOption),
+                        onClick = { setSelectedOption(option) }
+                    )
+                    Text(text = option, modifier = Modifier.padding(start = 8.dp))
+                }
+            }
         }
 
         Button(
@@ -140,9 +172,9 @@ fun BloodPressureScreen(
                     BloodPressureContract.Event.OnAddBloodPressure(
                         systolic = systolic.value,
                         diastolic = diastolic.value,
-                        date = date.value,
-                        time = time.value,
-                        userId = user.value.id
+                        dateTime = dateTime.value,
+                        user = user.value,
+                        state = selectedOption
                     )
                 )
             }
@@ -189,13 +221,14 @@ fun BloodPressureScreen(
                 event.invoke(BloodPressureContract.Event.ShowTimePicker(false))
 
                 datePickerState.selectedDateMillis?.let { dateMillis ->
-                    date.value =
-                        Instant.fromEpochMilliseconds(dateMillis).plus(1, DAY, TimeZone.UTC)
-                            .toLocalDateTime(TimeZone.currentSystemDefault()).date.toString()
-                }
+                    val date = Instant.fromEpochMilliseconds(dateMillis).plus(1, DAY, TimeZone.UTC)
+                        .toLocalDateTime(TimeZone.currentSystemDefault()).date
 
-                time.value = "$hour:$minute"
-                dateTime.value = "${date.value} ${time.value}"
+                    dateTime.value = LocalDateTime(
+                        date,
+                        LocalTime(hour, minute)
+                    ).format(LocalDateTime.Format { byUnicodePattern("yyyy/MM/dd - HH:mm") })
+                }
             }
 
         Snackbar(
@@ -205,7 +238,10 @@ fun BloodPressureScreen(
         ) {
             when (state.snackbarOptions) {
                 SnackbarBloodPressureOptions.Success -> event.invoke(BloodPressureContract.Event.OnBack)
-                SnackbarBloodPressureOptions.Warning, SnackbarBloodPressureOptions.Error -> event.invoke(BloodPressureContract.Event.OnHideSnackbar)
+                SnackbarBloodPressureOptions.Warning, SnackbarBloodPressureOptions.Error -> event.invoke(
+                    BloodPressureContract.Event.OnHideSnackbar
+                )
+
                 else -> {}
             }
         }

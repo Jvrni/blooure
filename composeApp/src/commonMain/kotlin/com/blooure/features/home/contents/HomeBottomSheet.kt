@@ -1,4 +1,4 @@
-package com.blooure.features.home.contents.bottomSheet
+package com.blooure.features.home.contents
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -9,25 +9,20 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.material3.rememberModalBottomSheetState
-import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import blooure.composeapp.generated.resources.Res
 import blooure.composeapp.generated.resources.home_options_bottom_sheet_title
-import com.blooure.features.home.contents.bottomSheet.models.OptionsBottomSheet
+import com.blooure.features.home.models.OptionsBottomSheet
 import com.designsystem.theme.Colors
 import com.designsystem.theme.Typography
 import com.navigation.Destinations

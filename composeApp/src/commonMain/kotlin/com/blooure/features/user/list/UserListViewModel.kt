@@ -3,6 +3,7 @@ package com.blooure.features.user.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.blooure.features.user.list.contract.UserListContract
+import com.domain.bloodPressure.DeleteBloodPressures
 import com.domain.models.User
 import com.domain.user.DeleteUser
 import com.domain.user.GetUsers
@@ -18,7 +19,8 @@ import kotlinx.coroutines.launch
 
 class UserListViewModel(
     private val getUsers: GetUsers,
-    private val deleteUser: DeleteUser
+    private val deleteUser: DeleteUser,
+    private val deleteBloodPressures: DeleteBloodPressures
 ) : ViewModel(), UserListContract {
     private val _state = MutableStateFlow(UserListContract.State())
     override val state: StateFlow<UserListContract.State> = _state.asStateFlow()
@@ -65,12 +67,18 @@ class UserListViewModel(
 
     private fun deleteUser(user: User) {
         viewModelScope.launch {
-            deleteUser.invoke(user)
+            deleteBloodPressures.invoke(user.id)
                 .catch {
 
                 }
                 .collect {
-                    getUsers()
+                    deleteUser.invoke(user)
+                        .catch {
+
+                        }
+                        .collect {
+                            getUsers()
+                        }
                 }
         }
     }

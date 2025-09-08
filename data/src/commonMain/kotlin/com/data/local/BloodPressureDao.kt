@@ -13,7 +13,7 @@ interface BloodPressureDao {
     suspend fun createBloodPressure(bloodPressureDb: BloodPressureDb)
 
     @Query("SELECT * FROM blood_pressure")
-    suspend fun getAllBloodPressure(): List<BloodPressureDb>?
+    suspend fun getBloodPressures(): List<BloodPressureDb>?
 
     @Query("SELECT * FROM blood_pressure WHERE id = :id")
     suspend fun getBloodPressure(id: Long): BloodPressureDb?
@@ -21,6 +21,6 @@ interface BloodPressureDao {
     @Update
     suspend fun updateBloodPressure(bloodPressure: BloodPressureDb)
 
-    @Query("DELETE FROM blood_pressure WHERE id = :id")
-    suspend fun deleteBloodPressure(id: Long)
+    @Query("DELETE FROM blood_pressure WHERE userId = :userId")
+    suspend fun deleteBloodPressure(userId: Long)
 }

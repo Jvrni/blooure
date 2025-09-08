@@ -1,6 +1,9 @@
 package com.blooure.features.home.contract
 
 import com.blooure.UnidirectionalViewModel
+import com.blooure.features.home.models.HomeItems
+import com.domain.models.BloodPressure
+import com.domain.models.User
 import com.navigation.Destinations
 
 /**
@@ -14,6 +17,7 @@ import com.navigation.Destinations
 interface HomeContract : UnidirectionalViewModel<HomeContract.State, HomeContract.Event, HomeContract.Effect> {
 
     data class State(
+        val items: List<HomeItems> = emptyList<HomeItems>(),
         val isBottomSheetVisible: Boolean = false
     )
 
