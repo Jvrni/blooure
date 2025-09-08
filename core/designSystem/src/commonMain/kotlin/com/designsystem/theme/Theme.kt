@@ -37,7 +37,7 @@ fun BlooureTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colors = if (darkTheme) darkColors else lightColors
+    val colors = if (darkTheme) lightColors else lightColors
     val rememberedColors = remember { colors.copy() }.apply { updateColors(colors) }
 
     CompositionLocalProvider(

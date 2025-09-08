@@ -26,6 +26,7 @@ Follows design and development best practices.
 - Add button to add new user on Add Blood Pressures Screen
 - Filter on Home Screen
 - Create more unit tests
+- Implement DarkTheme
 
 ## Architecture overview
 
