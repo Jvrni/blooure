@@ -26,6 +26,11 @@ https://github.com/user-attachments/assets/d925cff4-9ea9-4ed5-988e-39c75b91b917
   - Module Pattern
   - Repository Pattern
 
+## Improvements
+- Add button to add new user on Add Blood Pressures Screen
+- Filter on Home Screen
+- Create more unit tests
+
 ## Architecture overview
 
 The app architecture has three layers: a [data](https://developer.android.com/jetpack/guide/data-layer), [domain](https://developer.android.com/topic/architecture/domain-layer) and [UI](https://developer.android.com/jetpack/guide/ui-layer)
