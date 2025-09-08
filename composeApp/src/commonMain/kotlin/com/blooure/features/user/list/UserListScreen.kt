@@ -74,7 +74,7 @@ fun UserListScreen(state: UserListContract.State, event: (UserListContract.Event
         floatingActionButtonPosition = FabPosition.End
     ) { paddingValues ->
         LazyColumn(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(
                 horizontal = 16.dp,
                 vertical = paddingValues.calculateTopPadding()
@@ -82,7 +82,7 @@ fun UserListScreen(state: UserListContract.State, event: (UserListContract.Event
             verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
             item {
-                if (state.users.isEmpty())
+                if (state.users.isEmpty() && !state.showError)
                     Column(
                         modifier = Modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -103,7 +103,7 @@ fun UserListScreen(state: UserListContract.State, event: (UserListContract.Event
 
             item {
                 if (state.showError)
-                    Box(modifier = Modifier.fillMaxSize()) {
+                    Box(modifier = Modifier.fillMaxSize().background(Colors.background)) {
                         Text(
                             modifier = Modifier.align(Alignment.Center),
                             text = "Something went wrong",
@@ -114,7 +114,6 @@ fun UserListScreen(state: UserListContract.State, event: (UserListContract.Event
             }
 
             itemsIndexed(state.users) { index, user ->
-
                 Row(
                     modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
                     verticalAlignment = Alignment.CenterVertically,

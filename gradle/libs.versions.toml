@@ -14,6 +14,7 @@ junit = "4.13.2"
 kotlin = "2.2.10"
 kotlinStdlib = "2.2.10"
 kotlinxCoroutinesCore = "1.10.2"
+kotlinxDatetimeJvm = "0.7.1-0.6.x-compat"
 runner = "1.7.0"
 core = "1.7.0"
 jetbrainsKotlinJvm = "2.2.10"
@@ -39,6 +40,7 @@ kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", versio
 androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 androidx-core = { group = "androidx.test", name = "core", version.ref = "core" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetimeJvm" }
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }

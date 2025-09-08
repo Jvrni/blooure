@@ -26,6 +26,7 @@ import blooure.composeapp.generated.resources.add_user_title
 import com.blooure.features.user.add.contract.AddUserContract
 import com.blooure.features.user.add.models.SnackbarUserOptions
 import com.designsystem.components.Snackbar
+import com.designsystem.components.SnackbarOptions
 import com.designsystem.components.TopAppBar
 import com.designsystem.theme.Colors
 import com.domain.models.User
@@ -74,27 +75,16 @@ fun AddUserScreen(state: AddUserContract.State, event: (AddUserContract.Event) -
             Text(text = stringResource(Res.string.add_user_button_label))
         }
 
-        when(val option = state.snackbarOptions) {
-            SnackbarUserOptions.Success -> {
-                Snackbar(
-                    modifier = Modifier.fillMaxWidth().padding(16.dp).align(Alignment.TopCenter),
-                    showSnackbar = state.showSnackbar,
-                    message = stringResource(option.message)
-                ) {
-                    event.invoke(AddUserContract.Event.OnBack)
-                }
+        Snackbar(
+            modifier = Modifier.fillMaxWidth().padding(16.dp).align(Alignment.TopCenter),
+            snackbarOptions = state.snackbarOptions?.name?.let { SnackbarOptions.valueOf(it) },
+            message = state.snackbarOptions?.message?.let { stringResource(it) } ?: ""
+        ) {
+            when (state.snackbarOptions) {
+                SnackbarUserOptions.Success -> event.invoke(AddUserContract.Event.OnBack)
+                SnackbarUserOptions.Warning, SnackbarUserOptions.Error -> event.invoke(AddUserContract.Event.OnHideSnackbar)
+                else -> {}
             }
-            SnackbarUserOptions.Warning, SnackbarUserOptions.Error -> {
-                Snackbar(
-                    modifier = Modifier.fillMaxWidth().padding(16.dp).align(Alignment.TopCenter),
-                    showSnackbar = state.showSnackbar,
-                    containerColor = Colors.error,
-                    message = stringResource(option.message)
-                ) {
-                    event.invoke(AddUserContract.Event.OnHideSnackbar)
-                }
-            }
-            else -> {}
         }
     }
 }

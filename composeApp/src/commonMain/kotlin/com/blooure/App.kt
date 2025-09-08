@@ -47,7 +47,7 @@ fun App() {
             ) {
                 splashGraph(navController)
                 homeGraph(navController)
-                bloodPressureGraph()
+                bloodPressureGraph(navController)
                 userGraph(navController)
             }
         }

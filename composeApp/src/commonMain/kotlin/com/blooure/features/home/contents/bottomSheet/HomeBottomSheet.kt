@@ -13,9 +13,11 @@ import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberBottomSheetScaffoldState
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,7 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import blooure.composeapp.generated.resources.Res
-import blooure.composeapp.generated.resources.options_bottom_sheet_title
+import blooure.composeapp.generated.resources.home_options_bottom_sheet_title
 import com.blooure.features.home.contents.bottomSheet.models.OptionsBottomSheet
 import com.designsystem.theme.Colors
 import com.designsystem.theme.Typography
@@ -35,43 +37,19 @@ import org.jetbrains.compose.resources.stringResource
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeBottomSheet(
-    isVisible: Boolean,
     onDismiss: () -> Unit,
     onAction: (Destinations) -> Unit
 ) {
     val options = OptionsBottomSheet.entries.toTypedArray()
+    val bottomSheetState = rememberModalBottomSheetState()
 
-    val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
-        bottomSheetState = rememberStandardBottomSheetState(
-            skipHiddenState = false,
-            initialValue = SheetValue.Hidden,
-            confirmValueChange = {
-                if (it == SheetValue.Hidden) {
-                    onDismiss.invoke()
-                }
-                true
-            }
-        )
-    )
-
-    LaunchedEffect(isVisible) {
-        if (isVisible) {
-            bottomSheetScaffoldState.bottomSheetState.expand()
-        } else {
-            bottomSheetScaffoldState.bottomSheetState.hide()
-        }
-    }
-
-    BottomSheetScaffold(
+    ModalBottomSheet(
         modifier = Modifier.fillMaxWidth(),
-        sheetShape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp),
-        sheetContainerColor = Colors.background,
-        sheetShadowElevation = 5.dp,
-        sheetTonalElevation = 5.dp,
-        sheetSwipeEnabled = true,
-        sheetPeekHeight = 200.dp,
-        scaffoldState = bottomSheetScaffoldState,
-        sheetContent = {
+        shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp),
+        containerColor = Colors.background,
+        sheetState = bottomSheetState,
+        onDismissRequest = { onDismiss.invoke() },
+        content = {
             LazyColumn(
                 modifier = Modifier.fillMaxWidth(),
                 contentPadding = PaddingValues(16.dp),
@@ -80,7 +58,7 @@ fun HomeBottomSheet(
                 item {
                     Text(
                         modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp).weight(1f),
-                        text = stringResource(Res.string.options_bottom_sheet_title),
+                        text = stringResource(Res.string.home_options_bottom_sheet_title),
                         style = Typography.titleMedium,
                         textAlign = TextAlign.Center
                     )
@@ -111,7 +89,5 @@ fun HomeBottomSheet(
                 }
             }
         }
-    ) {
-
-    }
+    )
 }

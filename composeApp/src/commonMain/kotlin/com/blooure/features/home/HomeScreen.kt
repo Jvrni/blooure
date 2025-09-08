@@ -28,29 +28,24 @@ fun HomeScreen(state: HomeContract.State, event: (HomeContract.Event) -> Unit) {
         containerColor = Colors.background,
         contentColor = Colors.onBackground,
         floatingActionButton = {
-            AnimatedVisibility(
-                visible = !state.isBottomSheetVisible,
-                enter = fadeIn(),
-                exit = fadeOut()
+            FloatingActionButton(
+                elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 2.dp),
+                onClick = { event.invoke(HomeContract.Event.ShowBottomSheet(true)) }
             ) {
-                FloatingActionButton(
-                    elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 2.dp),
-                    onClick = { event.invoke(HomeContract.Event.ShowBottomSheet(true)) }
-                ) {
-                    Icon(
-                        painter = painterResource(Res.drawable.ic_plus),
-                        contentDescription = ""
-                    )
-                }
+                Icon(
+                    painter = painterResource(Res.drawable.ic_plus),
+                    contentDescription = ""
+                )
             }
         },
         floatingActionButtonPosition = FabPosition.End
     ) {
-        HomeBottomSheet(
-            isVisible = state.isBottomSheetVisible,
-            onDismiss = { event.invoke(HomeContract.Event.ShowBottomSheet(false)) }
-        ) {
-            event.invoke(HomeContract.Event.OnNavigate(it))
-        }
+        if (state.isBottomSheetVisible)
+            HomeBottomSheet(
+                onDismiss = { event.invoke(HomeContract.Event.ShowBottomSheet(false)) }
+            ) {
+                event.invoke(HomeContract.Event.ShowBottomSheet(false))
+                event.invoke(HomeContract.Event.OnNavigate(it))
+            }
     }
 }

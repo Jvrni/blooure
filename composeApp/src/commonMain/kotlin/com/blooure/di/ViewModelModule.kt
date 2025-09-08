@@ -1,5 +1,6 @@
 package com.blooure.di
 
+import com.blooure.features.bloodPressure.BloodPressureViewModel
 import com.blooure.features.home.HomeViewModel
 import com.blooure.features.user.add.AddUserViewModel
 import com.blooure.features.user.list.UserListViewModel
@@ -9,6 +10,10 @@ val provideViewModelModule = module {
 
     single {
         HomeViewModel()
+    }
+
+    single {
+        BloodPressureViewModel(get(), get())
     }
 
     single {
