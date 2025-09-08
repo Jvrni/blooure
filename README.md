@@ -1,35 +1,41 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+Blooure App
+==================
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+**Blooure App** is a fully functional multiplatform app built entirely with Kotlin and Jetpack Compose. This
+Follows design and development best practices.
 
-* [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+https://github.com/user-attachments/assets/533a00a5-4a9b-4e83-8ca1-6b2cc44b2609
 
-### Build and Run Android Application
+https://github.com/user-attachments/assets/d925cff4-9ea9-4ed5-988e-39c75b91b917
 
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
 
-### Build and Run iOS Application
+## Setup
+- As it is a project made in KMM, if you want to generate the iOS version, you will need a MacOS.
 
-To build and run the development version of the iOS app, use the run configuration from the run widget
-in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and run it from there.
+## Tech stack & Open-source libraries
+- Kotlin based, Jetpack Compose, MVI, Room, Coroutines flow + StateFlow for asynchronous.
 
----
+- **Jetpack**
+  - Compose: A modern toolkit for creating a native UI
+  - ViewModel: Manages UI-related data holder and lifecycle aware. Allows data to survive configuration changes such as screen rotations.
+  - Koin: for dependency injection.
+  - Room: Local Database
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+- **Architecture**
+  - MVI Architecture (Model - View - Intent)
+  - Module Pattern
+  - Repository Pattern
+
+## Improvements
+- Add button to add new user on Add Blood Pressures Screen
+- Filter on Home Screen
+- Create more unit tests
+
+## Architecture overview
+
+The app architecture has three layers: a [data](https://developer.android.com/jetpack/guide/data-layer), [domain](https://developer.android.com/topic/architecture/domain-layer) and [UI](https://developer.android.com/jetpack/guide/ui-layer)
+
+
+<center>
+<img src="images/architecture-overall.png" width="600px" alt="Diagram showing overall app architecture" />
+</center>

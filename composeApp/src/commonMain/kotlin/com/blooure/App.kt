@@ -13,7 +13,6 @@ import com.blooure.di.appModule
 import com.blooure.features.bloodPressure.bloodPressureGraph
 import com.blooure.features.home.homeGraph
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import com.blooure.features.splash.splashGraph
 import com.blooure.features.user.userGraph
 import com.designsystem.theme.BlooureTheme
 import com.designsystem.theme.Colors
@@ -30,6 +29,19 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) {
     }
 }
 
+/**
+ * The main entry point of the application.
+ *
+ * This composable function sets up the overall theme, surface, and navigation
+ * for the Blooure app. It initializes a [NavController] and uses a [NavHost]
+ * to define the different navigation graphs (home, blood pressure, user).
+ *
+ * The `BlooureTheme` provides the visual styling for the app.
+ * The `Surface` acts as the main container with a background color.
+ * `WindowInsets.safeDrawing` is applied to ensure content is displayed within safe areas.
+ *
+ * The navigation starts at the `Destinations.Home` screen.
+ */
 @Composable
 @Preview
 fun App() {
@@ -43,9 +55,8 @@ fun App() {
             NavHost(
                 modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
                 navController = navController,
-                startDestination = Destinations.Splash
+                startDestination = Destinations.Home
             ) {
-                splashGraph(navController)
                 homeGraph(navController)
                 bloodPressureGraph(navController)
                 userGraph(navController)

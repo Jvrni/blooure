@@ -24,6 +24,17 @@ import kotlinx.datetime.format
 import kotlinx.datetime.format.FormatStringsInDatetimeFormats
 import kotlinx.datetime.format.byUnicodePattern
 
+/**
+ * ViewModel for the Blood Pressure feature.
+ *
+ * This ViewModel handles the business logic for recording and managing blood pressure readings.
+ * It interacts with use cases to add blood pressure data and retrieve user information.
+ * It exposes state and effects to the UI through [StateFlow] and [SharedFlow] respectively,
+ * following the MVI (Model-View-Intent) pattern via the [BloodPressureContract].
+ *
+ * @property addBloodPressure Use case for adding a new blood pressure reading.
+ * @property getUsers Use case for fetching the list of users.
+ */
 class BloodPressureViewModel(
     private val addBloodPressure: AddBloodPressure,
     private val getUsers: GetUsers

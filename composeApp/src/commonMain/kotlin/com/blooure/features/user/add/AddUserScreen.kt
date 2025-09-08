@@ -32,6 +32,18 @@ import com.designsystem.theme.Colors
 import com.domain.models.User
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * Composable function for the Add User screen.
+ *
+ * This screen allows the user to input a name and add a new user.
+ * It displays a top app bar, a text field for the user's name,
+ * and a button to submit the new user.
+ * It also handles displaying snackbar messages for success, warning, or error states.
+ *
+ * @param state The current state of the Add User screen, containing information like snackbar options.
+ * @param event A function to send events from the UI to the ViewModel, such as back navigation,
+ * adding a user, or hiding the snackbar.
+ */
 @Composable
 fun AddUserScreen(state: AddUserContract.State, event: (AddUserContract.Event) -> Unit) {
     Box(modifier = Modifier.fillMaxSize().background(Colors.background)) {

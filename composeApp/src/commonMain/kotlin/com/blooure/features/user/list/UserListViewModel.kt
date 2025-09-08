@@ -17,6 +17,16 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel for the User List screen.
+ *
+ * This ViewModel is responsible for managing the state and business logic of the User List screen.
+ * It interacts with the domain layer (use cases) to fetch and manipulate user data.
+ *
+ * @param getUsers Use case for retrieving the list of users.
+ * @param deleteUser Use case for deleting a user.
+ * @param deleteBloodPressures Use case for deleting blood pressures associated with a user.
+ */
 class UserListViewModel(
     private val getUsers: GetUsers,
     private val deleteUser: DeleteUser,

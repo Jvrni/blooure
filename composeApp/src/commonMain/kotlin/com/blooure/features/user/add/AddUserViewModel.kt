@@ -16,6 +16,15 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel for the Add User screen.
+ *
+ * This ViewModel handles the business logic for adding a new user. It manages the UI state,
+ * processes user events, and interacts with the `AddUser` use case to perform the actual
+ * user creation.
+ *
+ * @property addUser The use case responsible for adding a user to the system.
+ */
 class AddUserViewModel(private val addUser: AddUser) : ViewModel(), AddUserContract {
 
     private val _state = MutableStateFlow(AddUserContract.State())

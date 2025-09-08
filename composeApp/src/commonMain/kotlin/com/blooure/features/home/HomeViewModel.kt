@@ -16,6 +16,17 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel for the Home screen.
+ *
+ * This ViewModel is responsible for preparing and managing the data for the Home screen.
+ * It interacts with the domain layer to fetch users and their blood pressure readings,
+ * and exposes this data as [StateFlow] to the UI. It also handles user interactions
+ * and emits [SharedFlow] effects for navigation or other one-time events.
+ *
+ * @property getUsers Use case for retrieving a list of users.
+ * @property getBloodPressures Use case for retrieving blood pressure readings.
+ */
 class HomeViewModel(
     private val getUsers: GetUsers,
     private val getBloodPressures: GetBloodPressures

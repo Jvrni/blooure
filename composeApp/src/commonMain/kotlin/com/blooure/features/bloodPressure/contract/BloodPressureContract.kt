@@ -4,6 +4,15 @@ import com.blooure.UnidirectionalViewModel
 import com.blooure.features.bloodPressure.models.SnackbarBloodPressureOptions
 import com.domain.models.User
 
+/**
+ * Defines the contract for the Blood Pressure feature, outlining its state, events, and effects.
+ *
+ * This contract adheres to the Unidirectional Data Flow (UDF) pattern, where the UI observes
+ * a [State], emits [Event]s to the ViewModel, and the ViewModel produces [Effect]s that
+ * trigger one-time actions in the UI (like navigation or showing a Snackbar).
+ *
+ * @see UnidirectionalViewModel
+ */
 interface BloodPressureContract : UnidirectionalViewModel<BloodPressureContract.State, BloodPressureContract.Event, BloodPressureContract.Effect> {
 
     data class State(

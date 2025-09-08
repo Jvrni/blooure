@@ -47,6 +47,17 @@ import com.navigation.Destinations
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
+/**
+ * Composable function for the User List Screen.
+ *
+ * This screen displays a list of users. It includes a top app bar with a back button,
+ * a floating action button to add new users, and a lazy column to display the list of users.
+ * It also handles empty states (no users) and error states.
+ *
+ * @param state The current state of the user list, containing the list of users and error information.
+ * @param event A lambda function to handle events triggered by user interactions,
+ *              such as clicking the back button, adding a user, or deleting a user.
+ */
 @Composable
 fun UserListScreen(state: UserListContract.State, event: (UserListContract.Event) -> Unit) {
     Scaffold(
